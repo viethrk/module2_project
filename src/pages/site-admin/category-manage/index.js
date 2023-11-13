@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import {
   addCategory,
+  delCategory,
   getCategory,
+  getCategoryById,
   initCategorys,
   updateCategory,
 } from "../../../services/admin/category-service";
 import { BUTTON_TEXT } from "../../../constants/commont-const";
 import CategoryComponent from "./category";
+import { Button, Form } from "react-bootstrap";
 
 const CategoryManageComponent = (props) => {
   // khai bao state
@@ -36,6 +39,9 @@ const CategoryManageComponent = (props) => {
   // component event
   const clickUpdate = (id) => {
     setTextBtn(BUTTON_TEXT.UPDATE);
+    const categoryUpdate = getCategoryById(id);
+    setInputId(categoryUpdate.id);
+    setInputName(categoryUpdate.name);
   };
 
   const addOrUpdateCategory = () => {
@@ -47,34 +53,56 @@ const CategoryManageComponent = (props) => {
       const cateAfterAdd = addCategory(newCategory);
       setCategorysState(cateAfterAdd);
     } else {
-      // updateCategory;
+      const update = {
+        id: inputId, // idRef.current.value
+        name: inputName, // nameRef.current.value
+      };
+      const cateAfterUpdate = updateCategory(update);
+      setCategorysState(cateAfterUpdate);
+      setTextBtn(BUTTON_TEXT.ADD);
     }
+
+    setInputId("");
+    setInputName("");
+  };
+
+  const onClickDel = (id) => {
+    setCategorysState(delCategory(id));
   };
 
   return (
     <div>
-      <div>
-        <input
+      <div className="d-flex mb-2">
+        <Form.Control
           // cach 2
           ref={idRef}
           // cach 1
           value={inputId}
           onChange={(event) => setInputId(event.target.value)}
-        ></input>
-        <input
+          className="me-2"
+        />
+        <Form.Control
           // cach 2
           ref={nameRef}
           // cach 1
           value={inputName}
           onChange={(event) => setInputName(event.target.value)}
-        ></input>
-        <button onClick={addOrUpdateCategory}>{textBtn}</button>
+          className="me-2"
+        />
+        <Button variant="primary" onClick={addOrUpdateCategory}>
+          {textBtn}
+        </Button>
       </div>
       <div>
         {categorysState.map((category) => {
           return (
             <>
-              <CategoryComponent id={category.id} name={category.name} />
+              <CategoryComponent
+                id={category.id}
+                name={category.name}
+                clickUpdate={clickUpdate}
+                clickDel={onClickDel}
+              />
             </>
           );
         })}

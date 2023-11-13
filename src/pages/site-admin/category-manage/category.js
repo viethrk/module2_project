@@ -1,3 +1,5 @@
+import { Button } from "react-bootstrap";
+
 // dung de hien thi 1 category
 const CategoryComponent = (props) => {
   const { id, name, clickUpdate, clickDel } = props;
@@ -6,8 +8,12 @@ const CategoryComponent = (props) => {
       <div>{id}</div>
       <div>{name}</div>
       <div>
-        <button onClick={() => clickUpdate(id)}>Update</button>
-        <button onClick={() => clickDel(id)}>Edit</button>
+        <Button variant="warning" onClick={() => clickUpdate(id)}>
+          Update
+        </Button>
+        <Button className="ms-2" variant="danger" onClick={() => clickDel(id)}>
+          Del
+        </Button>
       </div>
     </div>
   );

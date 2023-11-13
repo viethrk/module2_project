@@ -110,8 +110,8 @@ export const delCategory = (category_id) => {
     return element.id == category_id;
   });
 
-  const newCategorys = categorys.slice(indexDel, 1);
-  return setCategorys(newCategorys);
+  categorys.splice(indexDel, 1);
+  return setCategorys(categorys);
 };
 
 export const initCategorys = () => {

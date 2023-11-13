@@ -13,6 +13,8 @@ import { MENU_URL } from "../constants/commont-const";
 import AdminLoginComponent from "../pages/site-customer/auth/login";
 import RegisComponent from "../pages/site-customer/account/regis";
 import CategoryManageComponent from "../pages/site-admin/category-manage";
+import HeaderComponent from "../components/organisms/header";
+import FooterComponent from "../components/organisms/footer";
 
 const MenuContextComponent = (props) => {
   const [pageShow, setPageShow] = useState(MENU_URL.CUSTOMER.LOGIN);
@@ -32,9 +34,11 @@ const MenuContextComponent = (props) => {
 
   return (
     <MenuContext.Provider value={{ setPageShow }}>
-      <div className="d-flex min-vh-100 align-items-center justify-content-center">
+      <HeaderComponent />
+      <div className="d-flex align-items-center justify-content-center">
         {memoRender}
       </div>
+      <FooterComponent />
     </MenuContext.Provider>
   );
 };
