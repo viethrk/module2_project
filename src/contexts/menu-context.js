@@ -12,12 +12,15 @@ import { MENU_URL } from "../constants/commont-const";
 // component
 import AdminLoginComponent from "../pages/site-customer/auth/login";
 import RegisComponent from "../pages/site-customer/account/regis";
+import CategoryManageComponent from "../pages/site-admin/category-manage";
 
 const MenuContextComponent = (props) => {
   const [pageShow, setPageShow] = useState(MENU_URL.CUSTOMER.LOGIN);
 
   const memoRender = useMemo(() => {
-    switch (pageShow) {
+    switch (window.location.pathname) {
+      case MENU_URL.ADMIN.CATEGORY_MANAGE:
+        return <CategoryManageComponent />;
       case MENU_URL.CUSTOMER.LOGIN:
         return <AdminLoginComponent />;
       case MENU_URL.CUSTOMER.REGIS:
@@ -25,7 +28,8 @@ const MenuContextComponent = (props) => {
       default:
         return <AdminLoginComponent />;
     }
-  }, [pageShow]);
+  }, [window.location.pathname]);
+
   return (
     <MenuContext.Provider value={{ setPageShow }}>
       <div className="d-flex min-vh-100 align-items-center justify-content-center">
