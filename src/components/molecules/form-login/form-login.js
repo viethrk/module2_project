@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const FormLoginComponent = (props) => {
   // ===========props===========
@@ -60,9 +61,7 @@ const FormLoginComponent = (props) => {
             Check me out
           </label>
         </div>
-        <a href="#" onClick={regis}>
-          Regis now
-        </a>
+        <Link to={"/regis"}>Regis now</Link>
       </div>
       <Button variant="primary" onClick={onSubmit}>
         Submit

@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const FormRegisComponent = (props) => {
   // ===========props===========
@@ -62,9 +63,7 @@ const FormRegisComponent = (props) => {
       </div>
       <div className="d-flex justify-content-between">
         <div className="mb-3 form-check"></div>
-        <a href="#" onClick={login}>
-          Login now
-        </a>
+        <Link to={"/"}>Login</Link>
       </div>
       <Button variant="primary" onClick={onSubmit}>
         Submit
