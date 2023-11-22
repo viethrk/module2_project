@@ -1,12 +1,10 @@
-import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { MenuContext } from "../../contexts/define-context";
 import AdminRoute from "../../routes/admin-route";
 import { MENU_URL } from "../../constants/commont-const";
+import { useSelector } from "react-redux";
 
 const Private = () => {
-  const menu = useContext(MenuContext);
-  const { isLogin } = menu;
+  const isLogin = useSelector((state) => state.isLoginState);
 
   return isLogin ? <AdminRoute /> : <Navigate to={MENU_URL.ADMIN.LOGIN} />;
 };
