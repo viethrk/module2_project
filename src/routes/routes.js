@@ -11,7 +11,7 @@ const RouteComponent = () => {
     <BrowserRouter>
       <Routes>
         <Route
-          path={MENU_URL.CUSTOMER.LOGIN}
+          path={MENU_URL.ADMIN.LOGIN}
           element={
             <React.Suspense>
               <LoginComponent />

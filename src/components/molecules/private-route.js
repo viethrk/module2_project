@@ -8,7 +8,7 @@ const Private = () => {
   const menu = useContext(MenuContext);
   const { isLogin } = menu;
 
-  return isLogin ? <AdminRoute /> : <Navigate to={MENU_URL.CUSTOMER.LOGIN} />;
+  return isLogin ? <AdminRoute /> : <Navigate to={MENU_URL.ADMIN.LOGIN} />;
 };
 
 export default Private;
