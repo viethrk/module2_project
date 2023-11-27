@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import AdminMenu from "../components/organisms/menu/admin-menu";
 import React from "react";
+import { MENU_URL } from "../constants/commont-const";
 const CategoryManageComponent = React.lazy(() =>
   import("../pages/site-admin/category-manage")
 );
@@ -31,7 +32,7 @@ const AdminRoute = () => {
               }
             />
             <Route
-              path="/products"
+              path={MENU_URL.ADMIN.PRO_MANAGE}
               element={
                 <React.Suspense>
                   <CategoryManageComponent />

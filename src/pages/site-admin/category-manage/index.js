@@ -71,7 +71,7 @@ const CategoryManageComponent = (props) => {
   };
 
   return (
-    <div>
+    <div className="pt-2 container">
       <div className="d-flex mb-2">
         <Form.Control
           // cach 2

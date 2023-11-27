@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { MENU_URL } from "../../../constants/commont-const";
 
 const AdminMenu = () => {
   const navLinkClass = ({ isActive }) => {
@@ -20,7 +21,7 @@ const AdminMenu = () => {
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/products" className={navLinkClass}>
+            <NavLink to={MENU_URL.ADMIN.PRO_MANAGE} className={navLinkClass}>
               Products
             </NavLink>
           </li>

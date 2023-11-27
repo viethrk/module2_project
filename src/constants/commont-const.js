@@ -1,7 +1,7 @@
 export const MENU_URL = {
   ADMIN: {
     LOGIN: "/admin",
-    CUS_MANAGE: "/admin/customer",
+    CUS_MANAGE: "/admin/user",
     PRO_MANAGE: "/admin/product",
     CATEGORY_MANAGE: "/admin/category",
   },
