@@ -2,14 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import {
   addCategory,
   delCategory,
-  getCategory,
-  getCategoryById,
-  initCategorys,
-  updateCategory,
 } from "../../../services/admin/category-service";
 import { BUTTON_TEXT } from "../../../constants/commont-const";
 import CategoryComponent from "./category";
 import { Button, Form } from "react-bootstrap";
+import { getCategories, getCategoryById } from "../../../api/category-api";
 
 const CategoryManageComponent = (props) => {
   // khai bao state
@@ -26,20 +23,19 @@ const CategoryManageComponent = (props) => {
 
   // effect component
   useEffect(() => {
-    // lay categorys
-    let categorys = getCategory();
-    if (categorys.length == 0) {
-      initCategorys();
-      categorys = getCategory();
-    }
-
-    setCategorysState(categorys);
+    init();
   }, []);
 
-  // component event
-  const clickUpdate = (id) => {
+  const init = async () => {
+    // lay categorys
+    const categorys = await getCategories();
+
+    setCategorysState(categorys);
+  };
+
+  const updateCategory = async (id) => {
+    const categoryUpdate = await getCategoryById(id);
     setTextBtn(BUTTON_TEXT.UPDATE);
-    const categoryUpdate = getCategoryById(id);
     setInputId(categoryUpdate.id);
     setInputName(categoryUpdate.name);
   };
@@ -71,16 +67,8 @@ const CategoryManageComponent = (props) => {
   };
 
   return (
-    <div className="pt-2 container">
+    <div className="pt-5 container col-8">
       <div className="d-flex mb-2">
-        <Form.Control
-          // cach 2
-          ref={idRef}
-          // cach 1
-          value={inputId}
-          onChange={(event) => setInputId(event.target.value)}
-          className="me-2"
-        />
         <Form.Control
           // cach 2
           ref={nameRef}
@@ -100,7 +88,7 @@ const CategoryManageComponent = (props) => {
               <CategoryComponent
                 id={category.id}
                 name={category.name}
-                clickUpdate={clickUpdate}
+                clickUpdate={updateCategory}
                 clickDel={onClickDel}
               />
             </>

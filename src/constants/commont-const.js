@@ -11,6 +11,14 @@ export const MENU_URL = {
   },
 };
 
+export const API_URL = {
+  HOST_API: "http://localhost:8080",
+  CATEGORIES: "/categories",
+  PRODUCTS: "/products",
+  CARTS: "/carts",
+  USERS: "/users",
+};
+
 export const BUTTON_TEXT = {
   ADD: "Add",
   UPDATE: "Update",
