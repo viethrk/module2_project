@@ -1,8 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  addCategory,
-  delCategory,
-} from "../../../services/admin/category-service";
 import { BUTTON_TEXT } from "../../../constants/commont-const";
 import CategoryComponent from "./category";
 import { Button, Form } from "react-bootstrap";
@@ -33,37 +29,34 @@ const CategoryManageComponent = (props) => {
     setCategorysState(categorys);
   };
 
-  const updateCategory = async (id) => {
+  const getCategoryUpdate = async (id) => {
     const categoryUpdate = await getCategoryById(id);
     setTextBtn(BUTTON_TEXT.UPDATE);
     setInputId(categoryUpdate.id);
     setInputName(categoryUpdate.name);
   };
 
-  const addOrUpdateCategory = () => {
+  const addOrUpdateCategory = async () => {
     if (textBtn == BUTTON_TEXT.ADD) {
       const newCategory = {
-        id: inputId, // idRef.current.value
         name: inputName, // nameRef.current.value
       };
-      const cateAfterAdd = addCategory(newCategory);
-      setCategorysState(cateAfterAdd);
     } else {
       const update = {
         id: inputId, // idRef.current.value
         name: inputName, // nameRef.current.value
       };
-      const cateAfterUpdate = updateCategory(update);
-      setCategorysState(cateAfterUpdate);
       setTextBtn(BUTTON_TEXT.ADD);
     }
 
+    init();
     setInputId("");
     setInputName("");
   };
 
-  const onClickDel = (id) => {
-    setCategorysState(delCategory(id));
+  const onClickDel = async (id) => {
+    // call API del category
+    // sau khi xoa thanh cong, goi lai API get list category de hien thi
   };
 
   return (
@@ -88,7 +81,7 @@ const CategoryManageComponent = (props) => {
               <CategoryComponent
                 id={category.id}
                 name={category.name}
-                clickUpdate={updateCategory}
+                clickUpdate={getCategoryUpdate}
                 clickDel={onClickDel}
               />
             </>
