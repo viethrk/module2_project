@@ -3,8 +3,12 @@ import { BUTTON_TEXT } from "../../../constants/commont-const";
 import CategoryComponent from "./category";
 import { Button, Form } from "react-bootstrap";
 import { getCategories, getCategoryById } from "../../../api/category-api";
+import { useDispatch } from "react-redux";
+import { toggleLoading } from "../../../redux/reducer/loading-reducer";
 
 const CategoryManageComponent = (props) => {
+  const dispath = useDispatch();
+
   // khai bao state
   const [categorysState, setCategorysState] = useState([]);
   const [textBtn, setTextBtn] = useState(BUTTON_TEXT.ADD);
@@ -23,10 +27,17 @@ const CategoryManageComponent = (props) => {
   }, []);
 
   const init = async () => {
+    dispath(toggleLoading(123));
+    // quay 1 lan
     // lay categorys
     const categorys = await getCategories();
+    // tat quay di
 
-    setCategorysState(categorys);
+    setTimeout(() => {
+      dispath(toggleLoading(false));
+
+      setCategorysState(categorys);
+    }, 2000);
   };
 
   const getCategoryUpdate = async (id) => {
@@ -59,12 +70,11 @@ const CategoryManageComponent = (props) => {
     // sau khi xoa thanh cong, goi lai API get list category de hien thi
   };
 
+  // chay den day
   return (
     <div className="pt-5 container col-8">
       <div className="d-flex mb-2">
         <Form.Control
-          // cach 2
-          ref={nameRef}
           // cach 1
           value={inputName}
           onChange={(event) => setInputName(event.target.value)}
